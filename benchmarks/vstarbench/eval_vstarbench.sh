@@ -13,7 +13,7 @@ mp=$2
 path_to_all_results=$3
 patchStrategy=$4
 patchside_length=$5
-name=${patchStrategy}_${patchside_length}
+name=${CKPT}_${patchStrategy}_${patchside_length}
 
 gpu_list=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',' | sed 's/,$//')
 # gpu_list="2,3,4,5,6"
@@ -28,7 +28,7 @@ CHUNKS=${#GPULIST[@]}
 for IDX in $(seq 0 $((CHUNKS-1))); do
     CUDA_VISIBLE_DEVICES=${GPULIST[$IDX]} python ./benchmarks/vstarbench/model_vstar.py \
     --model-path $mp \
-    --gt_file /wangbenyou/xidong/VisionJamba/benchmarks/vstarbench/vstartest.json \
+    --gt_file ./benchmarks/vstarbench/vstartest.json \
     --output_dir ./benchmarks/vstarbench/outputs/$name \
     --output_name pred \
     --patchStrategy $patchStrategy \

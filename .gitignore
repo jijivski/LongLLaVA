@@ -2,6 +2,18 @@ ckpts/
 *.pyc
 logs/
 models/clip_vit_large_patch14_336/
-- models/clip_vit_large_patch14_336/.gitkeep
+!models/clip_vit_large_patch14_336/.gitkeep
 draft.py
 
+benchmarks/VIAH/images/
+benchmarks/VIAH/outputs/
+benchmarks/VIAH/video/
+
+# data added
+benchmarks/vstarbench/*/
+benchmarks/vstarbench/vstartest.json
+benchmarks/VIAH/VNBench-main-4try.json
+benchmarks/VIAH/VNBench-test.json
+benchmarks/vstarbench/test_questions.jsonl
+benchmarks/VIAH/unzip.sh
+benchmarks/vstarbench/unzip.sh
