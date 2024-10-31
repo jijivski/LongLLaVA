@@ -86,6 +86,8 @@ def eval_model(args):
     questions = get_chunk(questions, args.num_chunks, args.chunk_idx)
     answers_file = os.path.expanduser(args.answers_file)
     os.makedirs(os.path.dirname(answers_file), exist_ok=True)
+
+    print('len(questions):',len(questions),'answers_file',answers_file)
     ans_file = open(answers_file, "w")
 
     # if 'plain' in model_name and 'finetune' not in model_name.lower() and 'mmtag' not in args.conv_mode:

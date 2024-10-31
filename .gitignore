@@ -1,0 +1,7 @@
+ckpts/
+*.pyc
+logs/
+models/clip_vit_large_patch14_336/
+- models/clip_vit_large_patch14_336/.gitkeep
+draft.py
+
