@@ -7,7 +7,7 @@ from tqdm import tqdm
 def extract_frames(video, t=0.25):
     path_parts = video.split('/')
     base_name = os.path.splitext(path_parts[-1])[0]
-    output_dir = "/wangbenyou/xidong/VisionJamba/benchmarks/MVBench/images"
+    output_dir = "./benchmarks/MVBench/images"
     subdir = os.path.join(output_dir, base_name)
     os.makedirs(subdir, exist_ok=True)  # 确保子目录存在
 
@@ -73,6 +73,6 @@ def merge_json_files(file_path, output_file):
         
         
 # 使用示例
-file_path = '/wangbenyou/xidong/VisionJamba/benchmarks/MVBench/merged_new.json'
-output_file = '/wangbenyou/xidong/VisionJamba/benchmarks/MVBench/merged_new_path.json'
+file_path = './benchmarks/MVBench/merged_new.json'
+output_file = './benchmarks/MVBench/merged_new_path.json'
 merge_json_files(file_path, output_file)

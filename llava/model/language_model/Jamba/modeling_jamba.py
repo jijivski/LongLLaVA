@@ -88,6 +88,23 @@ except ImportError:
 is_fast_path_available = all(
     (selective_state_update, selective_scan_fn, causal_conv1d_fn, causal_conv1d_update, mamba_inner_fn)
 )
+# print("selective_state_update:", bool(selective_state_update))
+# print("selective_scan_fn:", bool(selective_scan_fn))
+# print("causal_conv1d_fn:", bool(causal_conv1d_fn))
+# print("causal_conv1d_update:", bool(causal_conv1d_update))
+# print("mamba_inner_fn:", bool(mamba_inner_fn))
+# selective_state_update: False
+# selective_scan_fn: False
+# causal_conv1d_fn: False
+# causal_conv1d_update: False
+# mamba_inner_fn: False
+print("selective_state_update:", selective_state_update)
+print("mamba_inner_fn:", mamba_inner_fn)
+print("selective_scan_fn:", selective_scan_fn)
+print("causal_conv1d_fn:", causal_conv1d_fn)
+print("causal_conv1d_update:", causal_conv1d_update)
+
+assert is_fast_path_available, f"Fast path is not available:{is_fast_path_available}. Please check the imports."
 
 
 logger = logging.get_logger(__name__)
@@ -1060,6 +1077,9 @@ class JambaMambaMixer(nn.Module):
 
     def mixer_forward(self, hidden_states, cache_params: MambaCacheParams = None):
         if self.use_fast_kernels:
+            # breakpoint()
+            # print('is_fast_path_available',is_fast_path_available)
+            # print('"cuda" not in self.x_proj.weight.device.type',"cuda" not in self.x_proj.weight.device.type,self.x_proj.weight.device)
             if not is_fast_path_available or "cuda" not in self.x_proj.weight.device.type:
                 raise ValueError(
                     "Fast Mamba kernels are not available. Make sure to they are installed and that the mamba module is on a CUDA device"

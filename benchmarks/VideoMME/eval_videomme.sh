@@ -16,8 +16,10 @@ T=$5
 FrameNum=$6
 echo $FrameNum
 
-gpu_list=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',' | sed 's/,$//')
+# gpu_list=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',' | sed 's/,$//')
 # gpu_list="2,3,4,5,6"
+gpu_list="6,7"
+
 
 read -a GPULIST <<< ${gpu_list//,/ }
 # GPULIST=(0 1)

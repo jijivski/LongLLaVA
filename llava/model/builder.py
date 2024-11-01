@@ -148,8 +148,12 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
                 model = AutoModelForCausalLM.from_pretrained(model_path, low_cpu_mem_usage=True, **kwargs)
 
     image_processor = None
+    print("'llava' in model_name.lower():",'llava' in model_name.lower(),'model_name',model_name)
+    # 'llava' in model_name.lower(): False model_name 10SFT2dSenseLong176K
 
-    if 'llava' in model_name.lower() or 'llava' in model_path.lower():
+    if not 'llava' in model_name.lower() or 'llava' in model_path.lower():
+        print('not normal llava, but continue')
+    
         mm_use_im_start_end = getattr(model.config, "mm_use_im_start_end", False)
         mm_use_im_patch_token = getattr(model.config, "mm_use_im_patch_token", True)
         if mm_use_im_patch_token:
@@ -160,6 +164,10 @@ def load_pretrained_model(model_path, model_base, model_name, load_8bit=False, l
             model.resize_token_embeddings(len(tokenizer))
 
         vision_tower = model.get_vision_tower()
+        
+        print(f'vision_tower: {vision_tower}, type: {type(vision_tower)}, is_loaded: {vision_tower.is_loaded}, device_map: {device_map}')#, image_processor: {vision_tower.image_processor}
+        # AttributeError: 'CLIPVisionTower' object has no attribute 'image_processor'
+
         if not vision_tower.is_loaded:
             vision_tower.load_model(device_map=device_map)
         if device_map != 'auto':

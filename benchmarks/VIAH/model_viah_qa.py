@@ -56,7 +56,9 @@ def eval_model(args):
     answers_file = os.path.join(args.output_dir, f"{output_name}.json")
     ans_file = open(answers_file, "w")
 
-    for sample in tqdm(gt_questions):
+    print(f'len(gt_questions): {len(gt_questions)}')
+    limit=100
+    for sample in tqdm(gt_questions[:limit]):
         bot.clear_history()
         torch.cuda.empty_cache()
         outputs = bot.chat(text=sample['question'], images=sample['video'], isVideo=True, t=args.t, frameNum=args.frameNum)

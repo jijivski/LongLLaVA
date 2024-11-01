@@ -299,8 +299,23 @@ class Chatbot():
                     print("The provided path does not exist.")
                     continue
             else:
-                print(f"The provided mediaItem is neither a recognized path nor a media object.\n mediaItem:{mediaItem}")
-                continue
+                mediaItem = mediaItem.replace('/wangbenyou/xidong/VisionJamba/','./')
+                # print(mediaItem,os.path.isfile(mediaItem))
+                if os.path.isfile(mediaItem):
+                    if is_video_file(mediaItem):
+                        # media is a video file path
+                        isVideo = True
+                        images.extend(extract_frames(mediaItem, t, frameNum))
+                        VideoFLAG = True
+                    elif check_image_path_valid(mediaItem):
+                        # media is an image file path
+                        images.append(mediaItem)
+                    else:
+                        print("The provided path does not exist.")
+                        continue
+                else:
+                    print(f"The provided mediaItem is neither a recognized path nor a media object.\n mediaItem:{mediaItem}")
+                    continue
 
 
         # assert len(images) < self.max_images_per_round, f'at most {self.max_images_per_round} images'

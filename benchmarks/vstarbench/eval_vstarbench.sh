@@ -15,8 +15,12 @@ patchStrategy=$4
 patchside_length=$5
 name=${CKPT}_${patchStrategy}_${patchside_length}
 
-gpu_list=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',' | sed 's/,$//')
+# gpu_list=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',' | sed 's/,$//')
 # gpu_list="2,3,4,5,6"
+gpu_list="6,7"
+# gpu_list=""
+
+
 
 read -a GPULIST <<< ${gpu_list//,/ }
 # GPULIST=(0 1)
@@ -36,6 +40,9 @@ for IDX in $(seq 0 $((CHUNKS-1))); do
     --num-chunks $CHUNKS \
     --chunk-idx $IDX \
     --conv-mode vicuna_v1 &
+
+    echo "CUDA_VISIBLE_DEVICES=${GPULIST[$IDX]} python ./benchmarks/vstarbench/model_vstar.py "
+
 done
 
 wait

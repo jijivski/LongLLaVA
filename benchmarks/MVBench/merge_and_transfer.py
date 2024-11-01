@@ -1,4 +1,4 @@
-base_dir = '/wangbenyou/xidong/VisionJamba/benchmarks/MVBench'
+base_dir = './benchmarks/MVBench'
 data_list_all = {
     "action_sequence.json": f"{base_dir}/video/star/Charades_v1_480/", # has start & end
     "action_prediction.json": f"{base_dir}/video/star/Charades_v1_480/", # has start & end
@@ -30,7 +30,7 @@ import shutil
 def extract_frames(video, t=0.5):
     path_parts = video.split('/')
     base_name = os.path.splitext(path_parts[-1])[0]
-    output_dir = "/wangbenyou/xidong/VisionJamba/benchmarks/MVBench/images"
+    output_dir = "./benchmarks/MVBench/images"
     subdir = os.path.join(output_dir, base_name)
     os.makedirs(subdir, exist_ok=True)  # 确保子目录存在
 
@@ -93,7 +93,7 @@ def sample_files(files, sample_size=200):
 choice_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
 # 处理视频裁剪或图片范围
-processed_path = '/wangbenyou/xidong/VisionJamba/benchmarks/MVBench/video/processed'
+processed_path = './benchmarks/MVBench/video/processed'
 os.makedirs(processed_path, exist_ok=True)
                         
                         
@@ -175,6 +175,6 @@ def merge_json_files(input_folder, output_file):
         json.dump(merged_data, output, ensure_ascii=False, indent=4)
 
 # 使用示例
-input_folder = '/wangbenyou/xidong/VisionJamba/benchmarks/MVBench/json'
-output_file = '/wangbenyou/xidong/VisionJamba/benchmarks/MVBench/merged_new.json'
+input_folder = './benchmarks/MVBench/json'
+output_file = './benchmarks/MVBench/merged_new.json'
 merge_json_files(input_folder, output_file)
