@@ -7,7 +7,7 @@ MODLE_DIR="./ckpts/10SFT2dSenseLong176K" # directory of the checkpoint
 patchStrategy="norm"   # [bestFit, norm]
 T=1.0
 FrameNum=128
-MODEL_ID="001" # a unique ID for the checkpoint that can be used to retrieve results
+MODEL_ID="orig_10SFT2dSenseLong176K_241101" # a unique ID for the checkpoint that can be used to retrieve results
 experiment_name="test_eval_241030"
 log_folder="./logs/${experiment_name}"
 mkdir -p $log_folder
@@ -48,13 +48,17 @@ PATH_TO_ALL_RESULTS="./benchmark_results/$MODEL_ID.txt"
 # VideoMME
 # bash benchmarks/VideoMME/eval_videomme.sh $MODEL_ID $MODLE_DIR $PATH_TO_ALL_RESULTS $patchStrategy $T $FrameNum > ${log_folder}/videomme.log 2>&1
 
-# VIAH
-# bash benchmarks/VIAH/eval_viah.sh $MODEL_ID $MODLE_DIR $PATH_TO_ALL_RESULTS $patchStrategy $T $FrameNum > ${log_folder}/viah.log 2>&1
-# bash benchmarks/VIAH/eval_viah.sh $MODEL_ID $MODLE_DIR $PATH_TO_ALL_RESULTS $patchStrategy $T $FrameNum 
 
 # vstarbench
+# test 100 passed
 patchside_length=336
 bash benchmarks/vstarbench/eval_vstarbench.sh $MODEL_ID $MODLE_DIR $PATH_TO_ALL_RESULTS $patchStrategy $patchside_length> ${log_folder}/vstarbench_norm.log 2>&1
 # bash benchmarks/vstarbench/eval_vstarbench.sh $MODEL_ID $MODLE_DIR $PATH_TO_ALL_RESULTS $patchStrategy $patchside_length
+
+# VIAH
+# test 100 passed
+bash benchmarks/VIAH/eval_viah.sh $MODEL_ID $MODLE_DIR $PATH_TO_ALL_RESULTS $patchStrategy $T $FrameNum > ${log_folder}/viah.log 2>&1
+# bash benchmarks/VIAH/eval_viah.sh $MODEL_ID $MODLE_DIR $PATH_TO_ALL_RESULTS $patchStrategy $T $FrameNum 
+
 
 # ########################## Run each benchmark sequentially ##########################

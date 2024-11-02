@@ -26,6 +26,8 @@ def generate_score(result_path, score_path):
     for filename in os.listdir(result_path):
         print(filename)
         if filename.endswith('.json'):
+            if 'incorrect_items' in filename or 'score' in filename:
+                continue
             file_path = os.path.join(result_path, filename)
             with open(file_path, 'r', encoding='utf-8') as file:
                 data = [json.loads(line) for line in file]

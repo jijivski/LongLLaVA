@@ -58,7 +58,8 @@ def eval_model(args):
 
     print(f'len(gt_questions): {len(gt_questions)}')
     limit=100
-    for sample in tqdm(gt_questions[:limit]):
+    # for sample in tqdm(gt_questions[:limit]):
+    for sample in tqdm(gt_questions):
         bot.clear_history()
         torch.cuda.empty_cache()
         outputs = bot.chat(text=sample['question'], images=sample['video'], isVideo=True, t=args.t, frameNum=args.frameNum)

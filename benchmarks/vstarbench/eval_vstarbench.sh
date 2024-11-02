@@ -15,9 +15,9 @@ patchStrategy=$4
 patchside_length=$5
 name=${CKPT}_${patchStrategy}_${patchside_length}
 
-# gpu_list=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',' | sed 's/,$//')
+gpu_list=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',' | sed 's/,$//')
 # gpu_list="2,3,4,5,6"
-gpu_list="6,7"
+# gpu_list="6,7"
 # gpu_list=""
 
 
@@ -46,6 +46,12 @@ for IDX in $(seq 0 $((CHUNKS-1))); do
 done
 
 wait
+
+echo "python ./benchmarks/vstarbench/generate_score.py \
+--output_path ./benchmarks/vstarbench/outputs/$name \
+--score_path ./benchmarks/vstarbench/outputs/$name/score.json \
+"
+
 
 python ./benchmarks/vstarbench/generate_score.py \
     --output_path ./benchmarks/vstarbench/outputs/$name \

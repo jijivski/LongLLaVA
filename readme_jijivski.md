@@ -180,3 +180,7 @@ from mamba_ssm.ops.selective_scan_interface import mamba_inner_fn, selective_sca
 from mamba_ssm.ops.triton.selective_state_update import selective_state_update
 from causal_conv1d import causal_conv1d_fn, causal_conv1d_update
 >>>
+
+
+
+python ./benchmarks/vstarbench/generate_score.py --output_path ./benchmarks/vstarbench/outputs/001_norm_336 --score_path ./benchmarks/vstarbench/outputs/001_norm_336/score.json
