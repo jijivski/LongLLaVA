@@ -720,6 +720,8 @@ def train(attn_implementation=None):
             )
         ))
 
+    print('model_args.model_name_or_path:',model_args.model_name_or_path)
+    
     if model_args.vision_tower is not None:
         if 'jamba' in model_args.model_name_or_path or 'Jamba' in model_args.model_name_or_path:
             model = LlavaJambaForCausalLM.from_pretrained(model_args.model_name_or_path, 

@@ -8,7 +8,7 @@ export WANDB_API_KEY=""
 # pip install git+https://github.com/Dao-AILab/causal-conv1d
 
 # need change 4 place
-experiment_name=MultiImageSFT
+experiment_name=MultiImageSFT_241101
 log_folder="./logs/${experiment_name}"
 mkdir -p $log_folder
 log_name=$(date +"%m-%d_%H-%M").log
@@ -24,9 +24,9 @@ log_name=$(date +"%m-%d_%H-%M").log
 deepspeed --hostfile hostfile \
     llava/train/train_mem.py \
     --deepspeed ./scripts/zero3.json \
-    --model_name_or_path ./ckpts/SingleImageSFT \
+    --model_name_or_path ./ckpts/10SFT2dSenseLong176K \
     --version jamba \
-    --data_path ./data/431VQA40960_144.json \
+    --data_path ./data/convert_mul_pic_241101.json \
     --vision_tower ./models/clip_vit_large_patch14_336 \
     --mm_projector_type mlp2x_gelu \
     --resamplePooling 2d \

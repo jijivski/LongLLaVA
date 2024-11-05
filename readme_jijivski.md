@@ -11,6 +11,38 @@ export PIP_INDEX_URL= https://pypi.tuna.tsinghua.edu.cn/simple
 export PIP_INDEX_URL=https://pypi.doubanio.com/simple
 
 pip install torch -i https://pypi.douban.com/simple
+pip install tf_keras -i https://pypi.douban.com/simple
+-i https://pypi.org/simple
+
+pip install json -i https://pypi.douban.com/simple
+
+
+
+https://github.com/keras-team/tf-keras/issues/756
+   When you use TensorFlow 2.16 with RC0 and testing Keras 2 path, please install pip install tf-keras~=2.16.0rc0 (will install RC2). If you use pip install tf-keras instead, it will install tf-keras==2.15 which is not compatible with TensorFlow 2.16.
+
+   The core of the issue is, in tf-keras 2.15 we didn't add a dependency to TensorFlow 2.15, so pip doesn't enforce that version compatibility. We fixed it in tf-keras 2.16, but may be we need to add a patch release for tf-keras 2.15 to avoid this.
+
+   @robertbcalhoun - Can you try this and confirm?
+
+(LongLLaVa) (base) root@a100-1:/nesa_data/remote_shome/zch/workspace/LongLLaVA# pip show tensorflow
+   Name: tensorflow
+   Version: 2.18.0
+   Summary: TensorFlow is an open source machine learning framework for everyone.
+   Home-page: https://www.tensorflow.org/
+   Author: Google Inc.
+   Author-email: packages@tensorflow.org
+   License: Apache 2.0
+   Location: /nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages
+   Requires: absl-py, astunparse, flatbuffers, gast, google-pasta, grpcio, h5py, keras, libclang, ml-dtypes, numpy, opt-einsum, packaging, protobuf, requests, setuptools, six, tensorboard, tensorflow-io-gcs-filesystem, termcolor, typing-extensions, wrapt
+   Required-by: 
+   (LongLLaVa) (base) root@a100-1:/nesa_data/remote_shome/zch/workspace/LongLLaVA# pip install tf-keras -i https://pypi.douban.com/simple
+   Looking in indexes: https://pypi.douban.com/simple
+
+https://keras.io/getting_started/
+   Meanwhile, the legacy Keras 2 package is still being released regularly and is available on PyPI as tf_keras (or equivalently tf-keras – note that - and _ are equivalent in PyPI package names). To use it, you can install it via pip install tf_keras then import it via import tf_keras as keras.
+
+   Should you want tf.keras to stay on Keras 2 after upgrading to TensorFlow 2.16+, you can configure your TensorFlow installation so that tf.keras points to tf_keras. To achieve this:
 
 
 pip install -r requirements.txt
@@ -184,3 +216,42 @@ from causal_conv1d import causal_conv1d_fn, causal_conv1d_update
 
 
 python ./benchmarks/vstarbench/generate_score.py --output_path ./benchmarks/vstarbench/outputs/001_norm_336 --score_path ./benchmarks/vstarbench/outputs/001_norm_336/score.json
+
+
+
+### make json data
+```
+cd /nesa_data/remote_shome/zch/workspace/LongLLaVA/
+python data/convert_mul_pic_241101.py
+```
+(LongLLaVa) (base) root@a100-1:/nesa_data/remote_shome/zch/workspace/LongLLaVA# python data/convert_mul_pic_241101.py
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1572/1572 [00:00<00:00, 233594.77it/s]
+Conversion complete. Output saved to ./data/convert_mul_pic_241101.json
+
+pip install tf-keras
+
+```
+# export wandb token
+export PYTHONPATH=/nesa_data/remote_shome/zch/workspace/LongLLaVA/:$PYTHONPATH
+bash MultiImageSFT.sh
+```
+
+
+
+
+
+
+
+
+
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f9ecc1f51e0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': /simple/tf-keras/
+ERROR: Could not find a version that satisfies the requirement tf_keras (from versions: none)
+ERROR: No matching distribution found for tf_keras
+
+ping: google.com: Name or service not known
+nano /etc/resolv.conf
+
+pip install tf_keras -i http://151.101.128.223/simple/ --trusted-host 151.101.128.223
+
+
+apt-get install libaio-dev

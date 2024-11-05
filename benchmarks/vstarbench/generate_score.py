@@ -27,7 +27,6 @@ def generate_score(result_path, score_path):
         print(filename)
         if filename.endswith('.json'):
             file_path = os.path.join(result_path, filename)
-            # breakpoint()
             if 'incorrect_items' in filename or 'score' in filename:
                 continue
             with open(file_path, 'r', encoding='utf-8') as file:
