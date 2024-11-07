@@ -424,7 +424,10 @@ def preprocess_jamba(
             
         target[cur_len:] = IGNORE_INDEX
         
+        print('debug:', debug)
         if debug or cur_len < tokenizer.model_max_length:
+            if cur_len < tokenizer.model_max_length:
+                print(f"cur_len < tokenizer.model_max_length: {cur_len} < {tokenizer.model_max_length}")
             if debug and (dist.get_rank() == 0):
                 input_id_100 = input_id[:100]
                 target_id_100 = target[:100]

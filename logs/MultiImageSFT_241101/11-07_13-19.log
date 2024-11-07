@@ -71,3 +71,77 @@ causal_conv1d_update: <function causal_conv1d_update at 0x7fb8aa4d45e0>
 [2024-11-07 13:19:39,550] [INFO] [comm.py:637:init_distributed] cdb=None
 [2024-11-07 13:19:39,552] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
 [2024-11-07 13:19:39,776] [INFO] [comm.py:637:init_distributed] cdb=None
+[E1107 13:49:39.798456791 socket.cpp:957] [c10d] The client socket has timed out after 1800s while trying to connect to (127.0.0.1, 0).
+Traceback (most recent call last):
+  File "/nesa_data/remote_shome/zch/workspace/LongLLaVA/llava/train/train_mem.py", line 5, in <module>
+    train(attn_implementation="flash_attention_2")
+  File "/nesa_data/remote_shome/zch/workspace/LongLLaVA/llava/train/train.py", line 700, in train
+    global local_rank
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/hf_argparser.py", line 339, in parse_args_into_dataclasses
+    obj = dtype(**inputs)
+  File "<string>", line 147, in __init__
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/training_args.py", line 1730, in __post_init__
+    self.device
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/training_args.py", line 2227, in device
+    return self._setup_devices
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/utils/generic.py", line 60, in __get__
+    cached = self.fget(obj)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/training_args.py", line 2160, in _setup_devices
+    self.distributed_state = PartialState(**accelerator_state_kwargs)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/accelerate/state.py", line 203, in __init__
+    dist.init_distributed(dist_backend=self.backend, auto_mpi_discovery=False, **kwargs)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/comm/comm.py", line 670, in init_distributed
+    cdb = TorchBackend(dist_backend, timeout, init_method, rank, world_size)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/comm/torch.py", line 112, in __init__
+    self.init_process_group(backend, timeout, init_method, rank, world_size)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/comm/torch.py", line 142, in init_process_group
+    torch.distributed.init_process_group(backend,
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 79, in wrapper
+    return func(*args, **kwargs)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 93, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 1361, in init_process_group
+    store, rank, world_size = next(rendezvous_iterator)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/rendezvous.py", line 258, in _env_rendezvous_handler
+    store = _create_c10d_store(master_addr, master_port, rank, world_size, timeout, use_libuv)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/rendezvous.py", line 185, in _create_c10d_store
+    return TCPStore(
+torch.distributed.DistNetworkError: The client socket has timed out after 1800s while trying to connect to (127.0.0.1, 0).
+Traceback (most recent call last):
+  File "/nesa_data/remote_shome/zch/workspace/LongLLaVA/llava/train/train_mem.py", line 5, in <module>
+    train(attn_implementation="flash_attention_2")
+  File "/nesa_data/remote_shome/zch/workspace/LongLLaVA/llava/train/train.py", line 700, in train
+    global local_rank
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/hf_argparser.py", line 339, in parse_args_into_dataclasses
+    obj = dtype(**inputs)
+  File "<string>", line 147, in __init__
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/training_args.py", line 1730, in __post_init__
+    self.device
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/training_args.py", line 2227, in device
+    return self._setup_devices
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/utils/generic.py", line 60, in __get__
+    cached = self.fget(obj)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/training_args.py", line 2160, in _setup_devices
+    self.distributed_state = PartialState(**accelerator_state_kwargs)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/accelerate/state.py", line 203, in __init__
+    dist.init_distributed(dist_backend=self.backend, auto_mpi_discovery=False, **kwargs)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/comm/comm.py", line 670, in init_distributed
+    cdb = TorchBackend(dist_backend, timeout, init_method, rank, world_size)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/comm/torch.py", line 112, in __init__
+    self.init_process_group(backend, timeout, init_method, rank, world_size)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/comm/torch.py", line 142, in init_process_group
+    torch.distributed.init_process_group(backend,
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 79, in wrapper
+    return func(*args, **kwargs)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 93, in wrapper
+    func_return = func(*args, **kwargs)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 1361, in init_process_group
+    store, rank, world_size = next(rendezvous_iterator)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/rendezvous.py", line 258, in _env_rendezvous_handler
+    store = _create_c10d_store(master_addr, master_port, rank, world_size, timeout, use_libuv)
+  File "/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/torch/distributed/rendezvous.py", line 185, in _create_c10d_store
+    return TCPStore(
+torch.distributed.DistStoreError: Timed out after 1801 seconds waiting for clients. 1/2 clients joined.
+[2024-11-07 13:49:43,749] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 392137
+[2024-11-07 13:49:44,008] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 392138
+[2024-11-07 13:49:44,008] [ERROR] [launch.py:325:sigkill_handler] ['/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/bin/python', '-u', 'llava/train/train_mem.py', '--local_rank=1', '--deepspeed', './scripts/zero3.json', '--model_name_or_path', './ckpts/10SFT2dSenseLong176K', '--version', 'jamba', '--data_path', './data/convert_mul_pic_241101.json', '--vision_tower', './models/clip_vit_large_patch14_336', '--mm_projector_type', 'mlp2x_gelu', '--resamplePooling', '2d', '--group_by_modality_length', 'True', '--mm_vision_select_layer', '-2', '--mm_use_im_start_end', 'False', '--mm_use_im_patch_token', 'False', '--image_aspect_ratio', 'pad', '--bf16', 'True', '--output_dir', './ckpts/MultiImageSFT_241101', '--num_train_epochs', '1', '--per_device_train_batch_size', '1', '--per_device_eval_batch_size', '1', '--gradient_accumulation_steps', '1', '--evaluation_strategy', 'no', '--save_strategy', 'steps', '--save_steps', '400', '--save_total_limit', '1', '--learning_rate', '1e-5', '--weight_decay', '0.', '--warmup_ratio', '0.03', '--lr_scheduler_type', 'cosine', '--logging_steps', '1', '--tf32', 'True', '--model_max_length', '40960', '--gradient_checkpointing', 'True', '--dataloader_num_workers', '8', '--lazy_preprocess', 'True', '--report_to', 'wandb'] exits with return code = 1
