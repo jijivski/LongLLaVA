@@ -579,6 +579,10 @@ class LazySupervisedDataset(Dataset):
             image_paths = self.list_data_dict[i]['image']
             processor = self.data_args.image_processor
             for image_path in image_paths:
+                
+                if not os.path.exists(image_path):
+                    image_path = r'/nesa_data/'+image_path
+
                 image = Image.open(image_path).convert('RGB')
                 if self.data_args.image_aspect_ratio == 'pad':
                     def expand2square(pil_img, background_color):
@@ -721,9 +725,9 @@ def train(attn_implementation=None):
         ))
 
     print('model_args.model_name_or_path:',model_args.model_name_or_path)
-    
+    # model_args.model_name_or_path: ./ckpts/10SFT2dSenseLong176K
     if model_args.vision_tower is not None:
-        if 'jamba' in model_args.model_name_or_path or 'Jamba' in model_args.model_name_or_path:
+        if 'jamba' in model_args.model_name_or_path or 'Jamba' in model_args.model_name_or_path or '10SFT2dSenseLong176K' in model_args.model_name_or_path:
             model = LlavaJambaForCausalLM.from_pretrained(model_args.model_name_or_path, 
                 attn_implementation="flash_attention_2", # ["eager","flash_attention_2"]
                 use_mamba_kernels=True, 

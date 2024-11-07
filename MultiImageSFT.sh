@@ -1,7 +1,8 @@
 #!/bin/bash
+# CUDA_VISIBLE_DEVICES="4,5,6,7" bash MultiImageSFT.sh
 
 export NCCL_ALGO=Tree
-export WANDB_API_KEY=""
+export WANDB_API_KEY=e343c6f2df76e0cab534608ebffa94798062a270
 
 # pip install -U transformers accelerate
 # pip install --upgrade Pillow
@@ -21,8 +22,8 @@ log_name=$(date +"%m-%d_%H-%M").log
 # chmod 755 /usr/lib/x86_64-linux-gnu/pdsh
 # chmod 755 /usr/lib
 
-deepspeed --hostfile hostfile \
-    llava/train/train_mem.py \
+deepspeed --master_port 0 \
+    --include localhost:7 llava/train/train_mem.py \
     --deepspeed ./scripts/zero3.json \
     --model_name_or_path ./ckpts/10SFT2dSenseLong176K \
     --version jamba \

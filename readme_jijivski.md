@@ -229,10 +229,100 @@ python data/convert_mul_pic_241101.py
 Conversion complete. Output saved to ./data/convert_mul_pic_241101.json
 
 pip install tf-keras
+pip install -U flash-attn --no-build-isolation
+
+
+>>>LongLLaVA/addition/build# git clone https://github.com/Dao-AILab/flash-attention.git
+cd flash-attention/
+time python setup.py install
+real    43m11.215s
+user    993m51.631s
+sys     23m14.015s
+
+cd addition/build/flash-attention
+pytest -q -s tests/test_flash_attn.py
+
+python /nesa_data/remote_shome/zch/workspace/LongLLaVA/addition/test_flash_attn2.py
+
+
+========================================================================= ERRORS =========================================================================
+_______________________________________________________ ERROR collecting tests/test_flash_attn.py ________________________________________________________
+ImportError while importing test module '/nesa_data/remote_shome/zch/workspace/LongLLaVA/addition/build/flash-attention/tests/test_flash_attn.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../../../../xianfeng/anaconda3/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_flash_attn.py:4: in <module>
+    import torch
+../../../../../../xianfeng/anaconda3/lib/python3.12/site-packages/torch/__init__.py:368: in <module>
+    from torch._C import *  # noqa: F403
+E   ImportError: /nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/torch/lib/../../nvidia/cusparse/lib/libcusparse.so.12: undefined symbol: __nvJitLinkComplete_12_4, version libnvJitLink.so.12
+================================================================ short test summary info =================================================================
+ERROR tests/test_flash_attn.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 error in 0.51s
+(LongLLaVa) (base) root@a100-1:/nesa_data/remote_shome/zch/workspace/LongLLaVA/addition/build/flash-attention# 
+
+
+export LD_LIBRARY_PATH=/nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.10/site-packages/nvidia/cusparse/lib:$LD_LIBRARY_PATH
+
+export LD_LIBRARY_PATH=/nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/nvidia/cusparse/lib:$LD_LIBRARY_PATH
+(LongLLaVa) (base) root@a100-1:/nesa_data/remote_shome/zch/workspace/LongLLaVA/addition/build/flash-attention# pytest -q -s tests/test_flash_attn.py
+
+========================================================================= ERRORS =========================================================================
+_______________________________________________________ ERROR collecting tests/test_flash_attn.py ________________________________________________________
+ImportError while importing test module '/nesa_data/remote_shome/zch/workspace/LongLLaVA/addition/build/flash-attention/tests/test_flash_attn.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../../../../../../xianfeng/anaconda3/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests/test_flash_attn.py:7: in <module>
+    from flash_attn import (
+E   ModuleNotFoundError: No module named 'flash_attn'
+================================================================ short test summary info =================================================================
+ERROR tests/test_flash_attn.py
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 error in 8.44s
+
+
+
+(LongLLaVa) (base) root@a100-1:/nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/nvidia/nvjitlink# ldd /nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/torch/lib/../../nvidia/cusparse/lib/libcusparse.so.12
+        linux-vdso.so.1 (0x00007ffd4c9cf000)
+        libnvJitLink.so.12 => /usr/local/cuda-12.1/lib64/libnvJitLink.so.12 (0x00007f2484400000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f2498509000)
+        librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f2498504000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f24984ff000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f2487519000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f24984dd000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f24841d7000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007f2498521000)
+(LongLLaVa) (base) root@a100-1:/nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/nvidia/nvjitlink# 
+
+export LD_LIBRARY_PATH=/nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/nvidia/cusparse/lib:$LD_LIBRARY_PATH
+
+(LongLLaVa) (base) root@a100-1:/nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/nvidia/nvjitlink# ldd /nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/torch/lib/../../nvidia/cusparse/lib/libcusparse.so.12
+        linux-vdso.so.1 (0x00007fff223bd000)
+        libnvJitLink.so.12 => /nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/nvidia/cusparse/lib/libnvJitLink.so.12 (0x00007ffb2d600000)
+        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007ffb41b9a000)
+        librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007ffb41b95000)
+        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007ffb41b90000)
+        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffb41aa7000)
+        libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007ffb41a87000)
+        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffb2d3d7000)
+        /lib64/ld-linux-x86-64.so.2 (0x00007ffb41bb2000)
+(LongLLaVa) (base) root@a100-1:/nesa_data/remote_shome/xianfeng/anaconda3/lib/python3.12/site-packages/nvidia/nvjitlink# 
+这里看起来仅仅是 
+这个LD path的问题, 解释为什么代码会在citepkg下面的nvidia里面?
+
+好了 解释一下
+
+
+
 
 ```
 # export wandb token
 export PYTHONPATH=/nesa_data/remote_shome/zch/workspace/LongLLaVA/:$PYTHONPATH
+cd /nesa_data/remote_shome/zch/workspace/LongLLaVA
 bash MultiImageSFT.sh
 ```
 

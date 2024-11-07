@@ -1,0 +1,73 @@
+[2024-11-07 13:19:09,613] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py:49: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(ctx, input, weight, bias=None):
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py:67: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, grad_output):
+[93m [WARNING] [0m Please specify the CUTLASS repo directory as environment variable $CUTLASS_PATH
+[93m [WARNING] [0m sparse_attn requires a torch version >= 1.5 and < 2.0 but detected 2.4
+[93m [WARNING] [0m using untested triton version (3.0.0), only 1.0.0 is known to be compatible
+[2024-11-07 13:19:13,608] [WARNING] [runner.py:202:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+[2024-11-07 13:19:13,609] [INFO] [runner.py:568:main] cmd = /nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/bin/python -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbNiwgN119 --master_addr=127.0.0.1 --master_port=0 --enable_each_rank_log=None llava/train/train_mem.py --deepspeed ./scripts/zero3.json --model_name_or_path ./ckpts/10SFT2dSenseLong176K --version jamba --data_path ./data/convert_mul_pic_241101.json --vision_tower ./models/clip_vit_large_patch14_336 --mm_projector_type mlp2x_gelu --resamplePooling 2d --group_by_modality_length True --mm_vision_select_layer -2 --mm_use_im_start_end False --mm_use_im_patch_token False --image_aspect_ratio pad --bf16 True --output_dir ./ckpts/MultiImageSFT_241101 --num_train_epochs 1 --per_device_train_batch_size 1 --per_device_eval_batch_size 1 --gradient_accumulation_steps 1 --evaluation_strategy no --save_strategy steps --save_steps 400 --save_total_limit 1 --learning_rate 1e-5 --weight_decay 0. --warmup_ratio 0.03 --lr_scheduler_type cosine --logging_steps 1 --tf32 True --model_max_length 40960 --gradient_checkpointing True --dataloader_num_workers 8 --lazy_preprocess True --report_to wandb
+[2024-11-07 13:19:17,503] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[93m [WARNING] [0m Please specify the CUTLASS repo directory as environment variable $CUTLASS_PATH
+[93m [WARNING] [0m sparse_attn requires a torch version >= 1.5 and < 2.0 but detected 2.4
+[93m [WARNING] [0m using untested triton version (3.0.0), only 1.0.0 is known to be compatible
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py:49: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(ctx, input, weight, bias=None):
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py:67: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, grad_output):
+[2024-11-07 13:19:21,859] [INFO] [launch.py:139:main] 0 NCCL_ALGO=Tree
+[2024-11-07 13:19:21,860] [INFO] [launch.py:146:main] WORLD INFO DICT: {'localhost': [6, 7]}
+[2024-11-07 13:19:21,860] [INFO] [launch.py:152:main] nnodes=1, num_local_procs=2, node_rank=0
+[2024-11-07 13:19:21,860] [INFO] [launch.py:163:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0, 1]})
+[2024-11-07 13:19:21,860] [INFO] [launch.py:164:main] dist_world_size=2
+[2024-11-07 13:19:21,860] [INFO] [launch.py:168:main] Setting CUDA_VISIBLE_DEVICES=6,7
+[2024-11-07 13:19:21,868] [INFO] [launch.py:256:main] process 392137 spawned with command: ['/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/bin/python', '-u', 'llava/train/train_mem.py', '--local_rank=0', '--deepspeed', './scripts/zero3.json', '--model_name_or_path', './ckpts/10SFT2dSenseLong176K', '--version', 'jamba', '--data_path', './data/convert_mul_pic_241101.json', '--vision_tower', './models/clip_vit_large_patch14_336', '--mm_projector_type', 'mlp2x_gelu', '--resamplePooling', '2d', '--group_by_modality_length', 'True', '--mm_vision_select_layer', '-2', '--mm_use_im_start_end', 'False', '--mm_use_im_patch_token', 'False', '--image_aspect_ratio', 'pad', '--bf16', 'True', '--output_dir', './ckpts/MultiImageSFT_241101', '--num_train_epochs', '1', '--per_device_train_batch_size', '1', '--per_device_eval_batch_size', '1', '--gradient_accumulation_steps', '1', '--evaluation_strategy', 'no', '--save_strategy', 'steps', '--save_steps', '400', '--save_total_limit', '1', '--learning_rate', '1e-5', '--weight_decay', '0.', '--warmup_ratio', '0.03', '--lr_scheduler_type', 'cosine', '--logging_steps', '1', '--tf32', 'True', '--model_max_length', '40960', '--gradient_checkpointing', 'True', '--dataloader_num_workers', '8', '--lazy_preprocess', 'True', '--report_to', 'wandb']
+[2024-11-07 13:19:21,870] [INFO] [launch.py:256:main] process 392138 spawned with command: ['/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/bin/python', '-u', 'llava/train/train_mem.py', '--local_rank=1', '--deepspeed', './scripts/zero3.json', '--model_name_or_path', './ckpts/10SFT2dSenseLong176K', '--version', 'jamba', '--data_path', './data/convert_mul_pic_241101.json', '--vision_tower', './models/clip_vit_large_patch14_336', '--mm_projector_type', 'mlp2x_gelu', '--resamplePooling', '2d', '--group_by_modality_length', 'True', '--mm_vision_select_layer', '-2', '--mm_use_im_start_end', 'False', '--mm_use_im_patch_token', 'False', '--image_aspect_ratio', 'pad', '--bf16', 'True', '--output_dir', './ckpts/MultiImageSFT_241101', '--num_train_epochs', '1', '--per_device_train_batch_size', '1', '--per_device_eval_batch_size', '1', '--gradient_accumulation_steps', '1', '--evaluation_strategy', 'no', '--save_strategy', 'steps', '--save_steps', '400', '--save_total_limit', '1', '--learning_rate', '1e-5', '--weight_decay', '0.', '--warmup_ratio', '0.03', '--lr_scheduler_type', 'cosine', '--logging_steps', '1', '--tf32', 'True', '--model_max_length', '40960', '--gradient_checkpointing', 'True', '--dataloader_num_workers', '8', '--lazy_preprocess', 'True', '--report_to', 'wandb']
+2024-11-07 13:19:28.530333: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-11-07 13:19:28.557036: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1730956768.604489  392137 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1730956768.644827  392137 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-11-07 13:19:28.692105: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 AVX512_FP16 AVX_VNNI AMX_TILE AMX_INT8 AMX_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-11-07 13:19:29.540977: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-11-07 13:19:29.580589: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1730956769.615136  392138 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1730956769.623916  392138 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-11-07 13:19:29.669229: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 AVX512_FP16 AVX_VNNI AMX_TILE AMX_INT8 AMX_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+selective_state_update: <function selective_state_update at 0x7fe5bc2b9090>
+mamba_inner_fn: <function mamba_inner_fn at 0x7fe5bc2b8820>
+selective_scan_fn: <function selective_scan_fn at 0x7fe5bc297e20>
+causal_conv1d_fn: <function causal_conv1d_fn at 0x7fe5bc2b83a0>
+causal_conv1d_update: <function causal_conv1d_update at 0x7fe5bc2b85e0>
+selective_state_update: <function selective_state_update at 0x7fb8aa4d5090>
+mamba_inner_fn: <function mamba_inner_fn at 0x7fb8aa4d4820>
+selective_scan_fn: <function selective_scan_fn at 0x7fb8aa4b3e20>
+causal_conv1d_fn: <function causal_conv1d_fn at 0x7fb8aa4d43a0>
+causal_conv1d_update: <function causal_conv1d_update at 0x7fb8aa4d45e0>
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/training_args.py:1525: FutureWarning: `evaluation_strategy` is deprecated and will be removed in version 4.46 of 🤗 Transformers. Use `eval_strategy` instead
+  warnings.warn(
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/transformers/training_args.py:1525: FutureWarning: `evaluation_strategy` is deprecated and will be removed in version 4.46 of 🤗 Transformers. Use `eval_strategy` instead
+  warnings.warn(
+[2024-11-07 13:19:37,885] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-11-07 13:19:37,920] [INFO] [real_accelerator.py:203:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[93m [WARNING] [0m Please specify the CUTLASS repo directory as environment variable $CUTLASS_PATH
+[93m [WARNING] [0m Please specify the CUTLASS repo directory as environment variable $CUTLASS_PATH
+[93m [WARNING] [0m sparse_attn requires a torch version >= 1.5 and < 2.0 but detected 2.4
+[93m [WARNING] [0m using untested triton version (3.0.0), only 1.0.0 is known to be compatible
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py:49: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(ctx, input, weight, bias=None):
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py:67: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, grad_output):
+[93m [WARNING] [0m sparse_attn requires a torch version >= 1.5 and < 2.0 but detected 2.4
+[93m [WARNING] [0m using untested triton version (3.0.0), only 1.0.0 is known to be compatible
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py:49: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(ctx, input, weight, bias=None):
+/nesa_data/remote_shome/xianfeng/anaconda3/envs/LongLLaVa/lib/python3.10/site-packages/deepspeed/runtime/zero/linear.py:67: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, grad_output):
+[2024-11-07 13:19:39,550] [INFO] [comm.py:637:init_distributed] cdb=None
+[2024-11-07 13:19:39,552] [INFO] [comm.py:668:init_distributed] Initializing TorchBackend in DeepSpeed with backend nccl
+[2024-11-07 13:19:39,776] [INFO] [comm.py:637:init_distributed] cdb=None

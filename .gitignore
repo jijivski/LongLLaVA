@@ -2,7 +2,8 @@ ckpts/
 *.pyc
 logs/*/*.log
 !logs/MultiImageSFT_241101/11-03_15-29.log
-# 
+!logs/MultiImageSFT_241101/11-07_13-27.log
+!logs/MultiImageSFT_241101/11-07_13-19.log
 
 models/clip_vit_large_patch14_336/
 !models/clip_vit_large_patch14_336/.gitkeep
@@ -22,3 +23,4 @@ benchmarks/VIAH/unzip.sh
 benchmarks/vstarbench/unzip.sh
 addition/mamba_ssm-2.2.2+cu122torch2.4cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
 data/convert_mul_pic_241101.json
+wandb/
