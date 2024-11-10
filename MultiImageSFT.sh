@@ -1,15 +1,15 @@
 #!/bin/bash
-# CUDA_VISIBLE_DEVICES="4,5,6,7" bash MultiImageSFT.sh
 
-export WANDB_API_KEY=e343c6f2df76e0cab534608ebffa94798062a270
 export NCCL_ALGO=Tree
+export WANDB_API_KEY=e343c6f2df76e0cab534608ebffa94798062a270
+
 
 # pip install -U transformers accelerate
 # pip install --upgrade Pillow
 # pip install git+https://github.com/Dao-AILab/causal-conv1d
 
 # need change 4 place
-experiment_name=MultiImageSFT_241101
+experiment_name=MultiImageSFT
 log_folder="./logs/${experiment_name}"
 mkdir -p $log_folder
 log_name=$(date +"%m-%d_%H-%M").log
@@ -21,12 +21,8 @@ log_name=$(date +"%m-%d_%H-%M").log
 # chown root:root /usr/lib
 # chmod 755 /usr/lib/x86_64-linux-gnu/pdsh
 # chmod 755 /usr/lib
-# export NCCL_DEBUG=DEBUG
-export NCCL_DEBUG=INFO
-export NCCL_DEBUG_SUBSYS=ALL
 
-deepspeed --master_port 0 \
-    --include localhost:6,7 llava/train/train_mem.py \
+deepspeed --include localhost:4,5,6,7 --master_port 29595 llava/train/train_mem.py \
     --deepspeed ./scripts/zero3.json \
     --model_name_or_path ./ckpts/10SFT2dSenseLong176K \
     --version jamba \
@@ -60,4 +56,3 @@ deepspeed --master_port 0 \
     --dataloader_num_workers 8 \
     --lazy_preprocess True \
     --report_to wandb > ${log_folder}/${log_name} 2>&1 &
-

@@ -3,12 +3,19 @@
 # conda activate LongLLaVa
 
 ########################## Setup model_id and checkpoint_dir ##########################
-MODLE_DIR="./ckpts/10SFT2dSenseLong176K" # directory of the checkpoint
+
+# MODLE_DIR="./ckpts/10SFT2dSenseLong176K" # directory of the checkpoint
+# experiment_name="test_eval_241030"
+
+MODLE_DIR="./ckpts/MultiImageSFT"
+experiment_name="sft_eval_241107"
+
 patchStrategy="norm"   # [bestFit, norm]
 T=1.0
 FrameNum=128
-MODEL_ID="orig_10SFT2dSenseLong176K_241101" # a unique ID for the checkpoint that can be used to retrieve results
-experiment_name="test_eval_241030"
+# MODEL_ID="orig_10SFT2dSenseLong176K_241101" # a unique ID for the checkpoint that can be used to retrieve results
+MODEL_ID="sft_10SFT2dSenseLong176K_241108" # a unique ID for the checkpoint that can be used to retrieve results
+
 log_folder="./logs/${experiment_name}"
 mkdir -p $log_folder
 ########################## Setup model_id and checkpoint_dir ##########################

@@ -15,9 +15,9 @@ patchStrategy=$4
 patchside_length=$5
 name=${CKPT}_${patchStrategy}_${patchside_length}
 
-gpu_list=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',' | sed 's/,$//')
+# gpu_list=$(nvidia-smi --query-gpu=index --format=csv,noheader | tr '\n' ',' | sed 's/,$//')
 # gpu_list="2,3,4,5,6"
-# gpu_list="6,7"
+gpu_list="4,5,6,7"
 # gpu_list=""
 
 

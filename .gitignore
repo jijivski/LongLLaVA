@@ -10,12 +10,19 @@ models/clip_vit_large_patch14_336/
 draft.py
 
 benchmarks/VIAH/images/
-benchmarks/VIAH/outputs/
 benchmarks/VIAH/video/
 
 # data added
-benchmarks/vstarbench/*/
 benchmarks/vstarbench/vstartest.json
+
+benchmarks/vstarbench/*/*
+# !benchmarks/vstarbench/outputs/orig_10SFT2dSenseLong176K_241101_norm_336
+# !benchmarks/vstarbench/outputs/sft_10SFT2dSenseLong176K_241108
+
+benchmarks/VIAH/outputs/*
+# !benchmarks/VIAH/outputs/sft_10SFT2dSenseLong176K_241108
+# !benchmarks/VIAH/outputs/orig_10SFT2dSenseLong176K_241101
+
 benchmarks/VIAH/VNBench-main-4try.json
 benchmarks/VIAH/VNBench-test.json
 benchmarks/vstarbench/test_questions.jsonl
